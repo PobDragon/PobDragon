@@ -216,6 +216,7 @@ public class SpinnerActivity extends Activity {
     		}
     		
     		tv = (TextView) findViewById(R.id.SpinnerResult); ;
+    		
     		tv.setText("Set Your Text to display here.");
 
 
