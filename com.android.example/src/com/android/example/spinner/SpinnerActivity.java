@@ -43,12 +43,17 @@ public class SpinnerActivity extends Activity {
     Spinner spinner1;
     Spinner spinner2;
     List<String> listSpinner2;
-    TextView tv;
+    TextView tvMain;
+    TextView tvPrereq;
     ArrayAdapter<String> dataAdapterSt2;
     // arrays:
     ArrayList listAttackSpinner = new ArrayList() ;
     ArrayList listDefenceSpinner = new ArrayList() ;
-    
+    ArrayList listGoAfterTheEnemySpinner = new ArrayList() ;
+    ArrayList listPullBackSpinner = new ArrayList() ;
+    ArrayList listOutOfCombatSpinner = new ArrayList() ;
+    ArrayList listUnusualEventsSpinner = new ArrayList() ;
+    ArrayList listRallyBattalionSpinner = new ArrayList() ;
     
     /**
      * Fields to contain the current position and display contents of the
@@ -113,9 +118,22 @@ public class SpinnerActivity extends Activity {
         listAttackSpinner.add("A1 - punch") ;
         listAttackSpinner.add("A2 - kick") ;
         listAttackSpinner.add("A3 - bite") ;
+        //
         listDefenceSpinner.add("D1 - block") ;
         listDefenceSpinner.add("D2 - hide") ;
         listDefenceSpinner.add("D3 - run away") ;
+        //
+        listGoAfterTheEnemySpinner.add("G1 - TBC");
+        //
+        listPullBackSpinner.add("P1 - TBC");
+        //
+        listOutOfCombatSpinner.add("O1 - TBC");
+        //
+        listUnusualEventsSpinner.add("U1 - TBC");
+        //
+        listRallyBattalionSpinner.add("R1 - TBC") ;
+        
+        
         
         Spinner spinner1 = (Spinner) findViewById(R.id.Spinner01);
 
@@ -218,38 +236,101 @@ public class SpinnerActivity extends Activity {
                     dataAdapterSt2.add((String)listDefenceSpinner.get(i));
                 }
             } 
+            if (SpinnerActivity.this.mSelection.equalsIgnoreCase("Go After the Enemy")) {
+                dataAdapterSt2.clear();
+                for (int i = 0; i < listGoAfterTheEnemySpinner.size(); i++) {
+                    dataAdapterSt2.add((String)listGoAfterTheEnemySpinner.get(i));
+                }
+            } 
+            if (SpinnerActivity.this.mSelection.equalsIgnoreCase("Pull Back")) {
+                dataAdapterSt2.clear();
+                for (int i = 0; i < listPullBackSpinner.size(); i++) {
+                    dataAdapterSt2.add((String)listPullBackSpinner.get(i));
+                }
+            } 
+            if (SpinnerActivity.this.mSelection.equalsIgnoreCase("Out of Combat")) {
+                dataAdapterSt2.clear();
+                for (int i = 0; i < listOutOfCombatSpinner.size(); i++) {
+                    dataAdapterSt2.add((String)listOutOfCombatSpinner.get(i));
+                }
+            } 
+            if (SpinnerActivity.this.mSelection.equalsIgnoreCase("Unusual Events")) {
+                dataAdapterSt2.clear();
+                for (int i = 0; i < listUnusualEventsSpinner.size(); i++) {
+                    dataAdapterSt2.add((String)listUnusualEventsSpinner.get(i));
+                }
+            } 
+            if (SpinnerActivity.this.mSelection.equalsIgnoreCase("Rally Battalion")) {
+                dataAdapterSt2.clear();
+                for (int i = 0; i < listRallyBattalionSpinner.size(); i++) {
+                    dataAdapterSt2.add((String)listRallyBattalionSpinner.get(i));
+                }
+            } 
 //            else {
 //                dataAdapterSt2.clear();
 //                dataAdapterSt2.add("Nothing found1");
 //            }//
-
+            
  
-            tv = (TextView) findViewById(R.id.SpinnerResult);;
+            tvMain = (TextView) findViewById(R.id.tvTextMain);;
+            tvPrereq = (TextView) findViewById(R.id.tvTextPrereq);;
+
+            tvMain.setText("Nothing Selected.");
+            tvPrereq.setText("No Prerequisites.");
+
 
             String spinnerString = SpinnerActivity.this.getSpinnerSelection();
-            // tv.setText(spinnerString) ;
-
-            tv.setText("Nothing.");
+            // tvMain.setText(spinnerString) ;
 
             String switchText = spinnerString;
             if (switchText.regionMatches(0, "A1", 0, 2)) {
-                tv.setText("This should contain \n A1 punch");
+                tvMain.setText("This should contain \n A1 punch");
             }
             else if (switchText.regionMatches(0, "A2", 0, 2)) {
-                tv.setText("This should contain \n A2 kick");
+                tvMain.setText("This should contain \n A2 kick");
             }
             else if (switchText.regionMatches(0, "A3", 0, 2)) {
-                tv.setText("This should contain \n A3 bite");
+                tvMain.setText("This should contain \n A3 bite");
             }
+            //
             else if (switchText.regionMatches(0, "D1", 0, 2)) {
-                tv.setText("This should contain \n D1 block");
+                tvMain.setText("This should contain \n D1 block");
             }
             else if (switchText.regionMatches(0, "D2", 0, 2)) {
-                tv.setText("This should contain \n D2 hide");
+                tvMain.setText("This should contain \n D2 hide");
             }
             else if (switchText.regionMatches(0, "D3", 0, 2)) {
-                tv.setText("This should contain \n D3 run away!!!");
+                tvMain.setText("This should contain \n D3 run away!!!");
             }
+            //
+            else if (switchText.regionMatches(0, "G1", 0, 2)) {
+                tvMain.setText("This should contain \n G1 Go after the enemy");
+            }
+            //
+            else if (switchText.regionMatches(0, "P1", 0, 2)) {
+                tvMain.setText("This should contain \n P1 Pull Back");
+            }
+            //
+            else if (switchText.regionMatches(0, "O1", 0, 2)) {
+                tvMain.setText("This should contain \n O1 Out of Combat");
+            }
+            //
+            else if (switchText.regionMatches(0, "U1", 0, 2)) {
+                tvMain.setText("This should contain \n U1 Unusual Events");
+            }
+            //
+            else if (switchText.regionMatches(0, "R1", 0, 2)) {
+                tvMain.setText("This should contain \n R1 Rally the Battalion!");
+                tvPrereq.setText("You need a Battalion! (test prereq text)");
+            }
+            //
+            
+        
+//        listGoAfterTheEnemySpinner.add("G1 - TBC");
+//        listPullBackSpinner.add("P1 - TBC");
+//        listOutOfCombatSpinner.add("O1 - TBC");
+//        listUnusualEventsSpinner.add("U1 - TBC");
+//        listRallyBattalionSpinner.add("R1 - TBC") ;
 
 //        listAttackSpinner.add("A1 - punch") ;
 //        listAttackSpinner.add("A2 - kick") ;

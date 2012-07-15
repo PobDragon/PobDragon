@@ -25,7 +25,11 @@
     <string-array name="Manouvres">
         <item>Attack</item>
         <item>Defence</item>
-        <item>Other</item>
+        <item>Go After the Enemy</item>
+        <item>Pull Back</item>
+        <item>Out of Combat</item>
+        <item>Unusual Events</item>
+        <item>Rally Battalion</item>
     </string-array>
     <string name="manouvre_prompt">Select a Manouvre</string>
     <!-- spinner2  -->

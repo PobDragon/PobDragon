@@ -50,9 +50,16 @@
         Creates a TextView called SpinnerResult, below the spinner.
     -->
     <TextView 
-        android:id="@+id/SpinnerResult" android:text="ResultSP02"
+        android:id="@+id/tvTextMain" android:text="Main Text"
         android:textSize="10pt"
-        android:textStyle="bold" android:gravity="center"
+        android:textStyle="normal" android:gravity="left"
+        android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+    </TextView>
+    <TextView 
+        android:id="@+id/tvTextPrereq" android:text="Prereqs"
+        android:textSize="10pt"
+        android:textStyle="normal" android:gravity="left"
         android:layout_width="wrap_content"
 		android:layout_height="wrap_content">
     </TextView>
