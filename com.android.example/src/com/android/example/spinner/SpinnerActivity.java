@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.example.spinner;
 
 import java.util.ArrayList;
@@ -35,71 +34,65 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
- * Displays an Android spinner widget backed by data in an array. The
- * array is loaded from the strings.xml resources file.
+ * Displays an Android spinner widget backed by data in an array. The array is
+ * loaded from the strings.xml resources file.
  */
 @TargetApi(11)
 public class SpinnerActivity extends Activity {
 
-	Spinner spinner1 ;
-	Spinner spinner2 ;
-	List<String> listSpinner2 ;
-	TextView tv;
-	ArrayAdapter<String> dataAdapterSt2 ;
-	
-	/**
-     * Fields to contain the current position and display contents of the spinner
+    Spinner spinner1;
+    Spinner spinner2;
+    List<String> listSpinner2;
+    TextView tv;
+    ArrayAdapter<String> dataAdapterSt2;
+    // arrays:
+    ArrayList listAttackSpinner = new ArrayList() ;
+    ArrayList listDefenceSpinner = new ArrayList() ;
+    
+    
+    /**
+     * Fields to contain the current position and display contents of the
+     * spinner
      */
     protected int mPos;
     protected String mSelection;
-
     /**
      * ArrayAdapter connects the spinner widget to array-based data.
      */
     protected ArrayAdapter<CharSequence> mAdapter;
-
     /**
-     *  The initial position of the spinner when it is first installed.
+     * The initial position of the spinner when it is first installed.
      */
     public static final int DEFAULT_POSITION = 2;
-
     /**
-     * The name of a properties file that stores the position and
-     * selection when the activity is not loaded.
+     * The name of a properties file that stores the position and selection when
+     * the activity is not loaded.
      */
     public static final String PREFERENCES_FILE = "SpinnerPrefs";
-
     /**
      * These values are used to read and write the properties file.
      * PROPERTY_DELIMITER delimits the key and value in a Java properties file.
      * The "marker" strings are used to write the properties into the file
      */
     public static final String PROPERTY_DELIMITER = "=";
-
     /**
      * The key or label for "position" in the preferences file
      */
     public static final String POSITION_KEY = "Position";
-
     /**
      * The key or label for "selection" in the preferences file
      */
     public static final String SELECTION_KEY = "Selection";
-
     public static final String POSITION_MARKER =
             POSITION_KEY + PROPERTY_DELIMITER;
-
     public static final String SELECTION_MARKER =
             SELECTION_KEY + PROPERTY_DELIMITER;
 
     /**
-     * Initializes the application and the activity.
-     * 1) Sets the view
-     * 2) Reads the spinner's backing data from the string resources file
-     * 3) Instantiates a callback listener for handling selection from the
-     *    spinner
-     * Notice that this method includes code that can be uncommented to force
-     * tests to fail.
+     * Initializes the application and the activity. 1) Sets the view 2) Reads
+     * the spinner's backing data from the string resources file 3) Instantiates
+     * a callback listener for handling selection from the spinner Notice that
+     * this method includes code that can be uncommented to force tests to fail.
      *
      * This method overrides the default onCreate() method for an Activity.
      *
@@ -109,19 +102,28 @@ public class SpinnerActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         /**
-         * derived classes that use onCreate() overrides must always call the super constructor
+         * derived classes that use onCreate() overrides must always call the
+         * super constructor
          */
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-
+        
+        // initialise the array strings:
+        listAttackSpinner.add("A1 - punch") ;
+        listAttackSpinner.add("A2 - kick") ;
+        listAttackSpinner.add("A3 - bite") ;
+        listDefenceSpinner.add("D1 - block") ;
+        listDefenceSpinner.add("D2 - hide") ;
+        listDefenceSpinner.add("D3 - run away") ;
+        
         Spinner spinner1 = (Spinner) findViewById(R.id.Spinner01);
 
         /*
          * Create a backing mLocalAdapter for the Spinner from a list of the
          * planets. The list is defined by XML in the strings.xml file.
          */
-        this.mAdapter = ArrayAdapter.createFromResource(this, R.array.Planets,
+        this.mAdapter = ArrayAdapter.createFromResource(this, R.array.Manouvres,
                 android.R.layout.simple_spinner_dropdown_item);
 
         /*
@@ -130,10 +132,10 @@ public class SpinnerActivity extends Activity {
         spinner1.setAdapter(this.mAdapter);
 
         /*
-         * Create a listener that is triggered when Android detects the
-         * user has selected an item in the Spinner.
+         * Create a listener that is triggered when Android detects the user has
+         * selected an item in the Spinner.
          */
-        OnItemSelectedListener spinnerListener = new myOnItemSelectedListener(this,this.mAdapter);
+        OnItemSelectedListener spinnerListener = new myOnItemSelectedListener(this, this.mAdapter);
 
         /*
          * Attach the listener to the Spinner.
@@ -141,25 +143,22 @@ public class SpinnerActivity extends Activity {
         spinner1.setOnItemSelectedListener(spinnerListener);
 
         spinner2 = (Spinner) findViewById(R.id.Spinner02);
-		listSpinner2 = new ArrayList<String>();
-		//
-		dataAdapterSt2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listSpinner2);
-		dataAdapterSt2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner2.setAdapter(dataAdapterSt2);
-		//
-        OnItemSelectedListener spinner2Listener = new myOnItemSelectedListener(this,this.mAdapter);
+        listSpinner2 = new ArrayList<String>();
+        //
+        dataAdapterSt2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listSpinner2);
+        dataAdapterSt2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(dataAdapterSt2);
+        //
+        OnItemSelectedListener spinner2Listener = new myOnItemSelectedListener(this, this.mAdapter);
         spinner2.setOnItemSelectedListener(spinner2Listener);
-        
-     
 
     }
 
-
     /**
-     *  A callback listener that implements the
-     *  {@link android.widget.AdapterView.OnItemSelectedListener} interface
-     *  For views based on adapters, this interface defines the methods available
-     *  when the user selects an item from the View.
+     * A callback listener that implements the
+     *  {@link android.widget.AdapterView.OnItemSelectedListener} interface For
+     * views based on adapters, this interface defines the methods available
+     * when the user selects an item from the View.
      *
      */
     public class myOnItemSelectedListener implements OnItemSelectedListener {
@@ -167,98 +166,120 @@ public class SpinnerActivity extends Activity {
         /*
          * provide local instances of the mLocalAdapter and the mLocalContext
          */
-
         ArrayAdapter<CharSequence> mLocalAdapter;
         Activity mLocalContext;
 
         /**
-         *  Constructor
-         *  @param c - The activity that displays the Spinner.
-         *  @param ad - The Adapter view that
-         *    controls the Spinner.
-         *  Instantiate a new listener object.
+         * Constructor
+         *
+         * @param c - The activity that displays the Spinner.
+         * @param ad - The Adapter view that controls the Spinner. Instantiate a
+         * new listener object.
          */
         public myOnItemSelectedListener(Activity c, ArrayAdapter<CharSequence> ad) {
 
-          this.mLocalContext = c;
-          this.mLocalAdapter = ad;
+            this.mLocalContext = c;
+            this.mLocalAdapter = ad;
 
         }
 
         /**
-         * When the user selects an item in the spinner, this method is invoked by the callback
-         * chain. Android calls the item selected listener for the spinner, which invokes the
-         * onItemSelected method.
+         * When the user selects an item in the spinner, this method is invoked
+         * by the callback chain. Android calls the item selected listener for
+         * the spinner, which invokes the onItemSelected method.
          *
-         * @see android.widget.AdapterView.OnItemSelectedListener#onItemSelected(
-         *  android.widget.AdapterView, android.view.View, int, long)
+         * @see
+         * android.widget.AdapterView.OnItemSelectedListener#onItemSelected(
+         * android.widget.AdapterView, android.view.View, int, long)
          * @param parent - the AdapterView for this listener
          * @param v - the View for this listener
-         * @param pos - the 0-based position of the selection in the mLocalAdapter
+         * @param pos - the 0-based position of the selection in the
+         * mLocalAdapter
          * @param row - the 0-based row number of the selection in the View
          */
         public void onItemSelected(AdapterView<?> parent, View v, int pos, long row) {
 
             SpinnerActivity.this.mPos = pos;
             SpinnerActivity.this.mSelection = parent.getItemAtPosition(pos).toString();
+            
             /*
              * Set the value of the text field in the UI
              */
-    		if (SpinnerActivity.this.mSelection.equalsIgnoreCase("Earth")){
-    			dataAdapterSt2.clear() ;
-    			dataAdapterSt2.add("Yes Earth1");
-    			dataAdapterSt2.add("Yes Earth2");
-    		}
-    		else {
-    			dataAdapterSt2.clear() ;
-    			dataAdapterSt2.add("No Earth found1");
-    			dataAdapterSt2.add("No Earth found2");    		
-    		}
-    		
-    		tv = (TextView) findViewById(R.id.SpinnerResult); ;
-    		
-                String spinnerString = SpinnerActivity.this.getSpinnerSelection() ;
-                // tv.setText(spinnerString) ;
-                
-                String switchText = spinnerString ;
-                boolean switchNo = switchText.regionMatches(0, "No", 0, 2) ;
-                boolean switchYes = switchText.regionMatches(0, "Yes", 0, 3) ;
-                
-                tv.setText("Nothing.");
-                if (switchNo) {
-                    tv.setText("Earth missing");                
+
+            if (SpinnerActivity.this.mSelection.equalsIgnoreCase("Attack")) {
+                dataAdapterSt2.clear();
+                for (int i = 0; i < listAttackSpinner.size(); i++) {
+                    dataAdapterSt2.add((String)listAttackSpinner.get(i));
                 }
-                if (switchYes) {
-                    tv.setText("Earth found");                
+            }
+            if (SpinnerActivity.this.mSelection.equalsIgnoreCase("Defence")) {
+                dataAdapterSt2.clear();
+                for (int i = 0; i < listDefenceSpinner.size(); i++) {
+                    dataAdapterSt2.add((String)listDefenceSpinner.get(i));
                 }
-                
+            } 
+//            else {
+//                dataAdapterSt2.clear();
+//                dataAdapterSt2.add("Nothing found1");
+//            }//
 
+ 
+            tv = (TextView) findViewById(R.id.SpinnerResult);;
 
+            String spinnerString = SpinnerActivity.this.getSpinnerSelection();
+            // tv.setText(spinnerString) ;
 
-    		           
+            tv.setText("Nothing.");
+
+            String switchText = spinnerString;
+            if (switchText.regionMatches(0, "A1", 0, 2)) {
+                tv.setText("This should contain \n A1 punch");
+            }
+            else if (switchText.regionMatches(0, "A2", 0, 2)) {
+                tv.setText("This should contain \n A2 kick");
+            }
+            else if (switchText.regionMatches(0, "A3", 0, 2)) {
+                tv.setText("This should contain \n A3 bite");
+            }
+            else if (switchText.regionMatches(0, "D1", 0, 2)) {
+                tv.setText("This should contain \n D1 block");
+            }
+            else if (switchText.regionMatches(0, "D2", 0, 2)) {
+                tv.setText("This should contain \n D2 hide");
+            }
+            else if (switchText.regionMatches(0, "D3", 0, 2)) {
+                tv.setText("This should contain \n D3 run away!!!");
+            }
+
+//        listAttackSpinner.add("A1 - punch") ;
+//        listAttackSpinner.add("A2 - kick") ;
+//        listAttackSpinner.add("A3 - bite") ;
+//        listDefenceSpinner.add("D1 - block") ;
+//        listDefenceSpinner.add("D2 - hide") ;
+//        listDefenceSpinner.add("D3 - run away") ;
+
         }
 
         /**
-         * The definition of OnItemSelectedListener requires an override
-         * of onNothingSelected(), even though this implementation does not use it.
+         * The definition of OnItemSelectedListener requires an override of
+         * onNothingSelected(), even though this implementation does not use it.
+         *
          * @param parent - The View for this Listener
          */
         public void onNothingSelected(AdapterView<?> parent) {
-
             // do nothing
-
         }
     }
 
     /**
-     * Restores the current state of the spinner (which item is selected, and the value
-     * of that item).
-     * Since onResume() is always called when an Activity is starting, even if it is re-displaying
-     * after being hidden, it is the best place to restore state.
+     * Restores the current state of the spinner (which item is selected, and
+     * the value of that item). Since onResume() is always called when an
+     * Activity is starting, even if it is re-displaying after being hidden, it
+     * is the best place to restore state.
      *
      * Attempts to read the state from a preferences file. If this read fails,
-     * assume it was just installed, so do an initialization. Regardless, change the
-     * state of the spinner to be the previous position.
+     * assume it was just installed, so do an initialization. Regardless, change
+     * the state of the spinner to be the previous position.
      *
      * @see android.app.Activity#onResume()
      */
@@ -272,30 +293,34 @@ public class SpinnerActivity extends Activity {
         super.onResume();
 
         /*
-         * Try to read the preferences file. If not found, set the state to the desired initial
-         * values.
+         * Try to read the preferences file. If not found, set the state to the
+         * desired initial values.
          */
 
-        if (!readInstanceState(this)) setInitialState();
+        if (!readInstanceState(this)) {
+            setInitialState();
+        }
 
         /*
          * Set the spinner to the current state.
          */
 
-        Spinner restoreSpinner = (Spinner)findViewById(R.id.Spinner01);
+        Spinner restoreSpinner = (Spinner) findViewById(R.id.Spinner01);
         restoreSpinner.setSelection(getSpinnerPosition());
 
-        Spinner restoreSpinner2 = (Spinner)findViewById(R.id.Spinner02);
+        Spinner restoreSpinner2 = (Spinner) findViewById(R.id.Spinner02);
         restoreSpinner2.setSelection(getSpinnerPosition());
 
     }
 
     /**
-     * Store the current state of the spinner (which item is selected, and the value of that item).
-     * Since onPause() is always called when an Activity is about to be hidden, even if it is about
-     * to be destroyed, it is the best place to save state.
+     * Store the current state of the spinner (which item is selected, and the
+     * value of that item). Since onPause() is always called when an Activity is
+     * about to be hidden, even if it is about to be destroyed, it is the best
+     * place to save state.
      *
-     * Attempt to write the state to the preferences file. If this fails, notify the user.
+     * Attempt to write the state to the preferences file. If this fails, notify
+     * the user.
      *
      * @see android.app.Activity#onPause()
      */
@@ -309,13 +334,14 @@ public class SpinnerActivity extends Activity {
         super.onPause();
 
         /*
-         * Save the state to the preferences file. If it fails, display a Toast, noting the failure.
+         * Save the state to the preferences file. If it fails, display a Toast,
+         * noting the failure.
          */
 
         if (!writeInstanceState(this)) {
-             Toast.makeText(this,
-                     "Failed to write state!", Toast.LENGTH_LONG).show();
-          }
+            Toast.makeText(this,
+                    "Failed to write state!", Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
@@ -329,15 +355,17 @@ public class SpinnerActivity extends Activity {
 
     /**
      * Read the previous state of the spinner from the preferences file
+     *
      * @param c - The Activity's Context
      */
     public boolean readInstanceState(Context c) {
 
         /*
-         * The preferences are stored in a SharedPreferences file. The abstract implementation of
-         * SharedPreferences is a "file" containing a hashmap. All instances of an application
-         * share the same instance of this file, which means that all instances of an application
-         * share the same preference settings.
+         * The preferences are stored in a SharedPreferences file. The abstract
+         * implementation of SharedPreferences is a "file" containing a hashmap.
+         * All instances of an application share the same instance of this file,
+         * which means that all instances of an application share the same
+         * preference settings.
          */
 
         /*
@@ -346,24 +374,26 @@ public class SpinnerActivity extends Activity {
 
         SharedPreferences p = c.getSharedPreferences(PREFERENCES_FILE, MODE_WORLD_READABLE);
         /*
-         * Get the position and value of the spinner from the file, or a default value if the
-         * key-value pair does not exist.
+         * Get the position and value of the spinner from the file, or a default
+         * value if the key-value pair does not exist.
          */
         this.mPos = p.getInt(POSITION_KEY, SpinnerActivity.DEFAULT_POSITION);
         this.mSelection = p.getString(SELECTION_KEY, "");
 
         /*
-         * SharedPreferences doesn't fail if the code tries to get a non-existent key. The
-         * most straightforward way to indicate success is to return the results of a test that
-         * SharedPreferences contained the position key.
+         * SharedPreferences doesn't fail if the code tries to get a
+         * non-existent key. The most straightforward way to indicate success is
+         * to return the results of a test that SharedPreferences contained the
+         * position key.
          */
 
-          return (p.contains(POSITION_KEY));
+        return (p.contains(POSITION_KEY));
 
-        }
+    }
 
     /**
      * Write the application's current state to a properties repository.
+     *
      * @param c - The Activity's Context
      *
      */
@@ -377,8 +407,8 @@ public class SpinnerActivity extends Activity {
                 c.getSharedPreferences(SpinnerActivity.PREFERENCES_FILE, MODE_WORLD_READABLE);
 
         /*
-         * Get the editor for this object. The editor interface abstracts the implementation of
-         * updating the SharedPreferences object.
+         * Get the editor for this object. The editor interface abstracts the
+         * implementation of updating the SharedPreferences object.
          */
 
         SharedPreferences.Editor e = p.edit();
@@ -391,8 +421,8 @@ public class SpinnerActivity extends Activity {
         e.putString(SELECTION_KEY, this.mSelection);
 
         /*
-         * Commit the changes. Return the result of the commit. The commit fails if Android
-         * failed to commit the changes to persistent storage.
+         * Commit the changes. Return the result of the commit. The commit fails
+         * if Android failed to commit the changes to persistent storage.
          */
 
         return (e.commit());

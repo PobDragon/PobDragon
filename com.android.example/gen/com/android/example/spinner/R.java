@@ -9,10 +9,10 @@ package com.android.example.spinner;
 
 public final class R {
     public static final class array {
-        public static final int Planets=0x7f050000;
         /**  spinner2  
          */
-        public static final int Plants=0x7f050001;
+        public static final int Attack=0x7f050001;
+        public static final int Manouvres=0x7f050000;
     }
     public static final class attr {
     }
@@ -29,7 +29,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
-        public static final int planet_prompt=0x7f040001;
-        public static final int plant_prompt=0x7f040002;
+        public static final int attack_prompt=0x7f040002;
+        public static final int manouvre_prompt=0x7f040001;
     }
 }

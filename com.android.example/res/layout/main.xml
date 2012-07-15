@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:drawSelectorOnTop = "true"
-        android:prompt = "@string/planet_prompt">
+        android:prompt = "@string/manouvre_prompt">
     </Spinner>
     <!--
         Creates a spinner widget called Spinner02, within the Linear Layout
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:drawSelectorOnTop = "true"
-        android:prompt = "@string/plant_prompt">
+        android:prompt = "@string/attack_prompt">
     </Spinner>
     
     <!--

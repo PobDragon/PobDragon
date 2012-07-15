@@ -22,22 +22,18 @@
  -->
 <resources>
     <string name="app_name">Spinner</string>
-    <string-array name="Planets">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-        <item>Pluto</item>
+    <string-array name="Manouvres">
+        <item>Attack</item>
+        <item>Defence</item>
+        <item>Other</item>
     </string-array>
-    <string name="planet_prompt">Select a planet</string>
+    <string name="manouvre_prompt">Select a Manouvre</string>
     <!-- spinner2  -->
-    <string-array name="Plants">
-        <item>Mer</item>
-        <item>Ven</item>
+    <string-array name="Attack">
+        <item>Att - Attack</item>
+        <item>Att - Charge</item>
+        <item>Def - Stand fast</item>
+        <item>Def - Stand with another</item>
     </string-array>
-    <string name="plant_prompt">Select a plant</string>
+    <string name="attack_prompt">subclass Manouvres</string>
 </resources>
