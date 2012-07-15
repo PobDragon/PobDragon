@@ -115,26 +115,56 @@ public class SpinnerActivity extends Activity {
         setContentView(R.layout.main);
         
         // initialise the array strings:
-        listAttackSpinner.add("A1 - punch") ;
-        listAttackSpinner.add("A2 - kick") ;
-        listAttackSpinner.add("A3 - bite") ;
         //
-        listDefenceSpinner.add("D1 - block") ;
-        listDefenceSpinner.add("D2 - hide") ;
-        listDefenceSpinner.add("D3 - run away") ;
+        // See spreadsheet "Generating_listSpinner_Arrays.ods"
         //
-        listGoAfterTheEnemySpinner.add("G1 - TBC");
-        //
-        listPullBackSpinner.add("P1 - TBC");
-        //
-        listOutOfCombatSpinner.add("O1 - TBC");
-        //
-        listUnusualEventsSpinner.add("U1 - TBC");
-        //
-        listRallyBattalionSpinner.add("R1 - TBC") ;
-        
-        
-        
+        // Offensive Maneuvers
+        listAttackSpinner.add("A0 - Select an Offensive Maneuver") ;
+        listAttackSpinner.add("A1 - Assault vs. Position") ;
+        listAttackSpinner.add("A2 - Attack") ;
+        listAttackSpinner.add("A3 - Attack vs. Two") ;
+        listAttackSpinner.add("A4 - Attack with Another") ;
+        listAttackSpinner.add("A5 - Assault vs. Position") ;
+        listAttackSpinner.add("A6 - Charge") ;
+        listAttackSpinner.add("A7 - Move on Flank") ;
+        listAttackSpinner.add("A8 - Push Deeper") ;
+        listAttackSpinner.add("A9 - Run Down Sprinter") ;
+        // Defensive Maneuvers 
+        listDefenceSpinner.add("D0 - Select a Defensive Maneuver") ;
+        listDefenceSpinner.add("D1 - Stand Fast ") ;
+        listDefenceSpinner.add("D2 - Stand vs. Charge ") ;
+        listDefenceSpinner.add("D3 - Stand vs. Two ") ;
+        listDefenceSpinner.add("D4 - Stand with Another ") ;
+        listDefenceSpinner.add("D5 - Dropped Rock ") ;
+        listDefenceSpinner.add("D6 - Reargaurd ") ;
+        // Go After the Enemy 
+        listGoAfterTheEnemySpinner.add("G0 - Select Go After The Enemy choice") ;
+        listGoAfterTheEnemySpinner.add("G1 - Stop") ;
+        listGoAfterTheEnemySpinner.add("G2 - Follow") ;
+        listGoAfterTheEnemySpinner.add("G3 - Pursue ") ;
+        listGoAfterTheEnemySpinner.add("G4 - Chase ") ;
+        // Pull Back 
+        listPullBackSpinner.add("P0 - Select Pull Back event") ;
+        listPullBackSpinner.add("P1 - Run Away! ") ;
+        listPullBackSpinner.add("P2 - Sprint ") ;
+        listPullBackSpinner.add("P3 - Withdraw ") ;
+        listPullBackSpinner.add("P4 - Flee Fighting ") ;
+        listPullBackSpinner.add("P5 - Seeking a Special Unit ") ;
+        // Out of Combat 
+        listOutOfCombatSpinner.add("O0 - Select Out of Combat event") ;
+        listOutOfCombatSpinner.add("O1 - Advance ") ;
+        listOutOfCombatSpinner.add("O2 - Remain Disengaged ") ;
+        listOutOfCombatSpinner.add("O3 - Remove (Self) ") ;
+        // Unusual Events 
+        listUnusualEventsSpinner.add("U0 - Select Unusual Event") ;
+        listUnusualEventsSpinner.add("U1 - Opportunity ") ;
+        listUnusualEventsSpinner.add("U2 - Surprise ") ;
+        // Rally Battalion 
+        listRallyBattalionSpinner.add("R0 - Select Rally Battalion") ;
+        listRallyBattalionSpinner.add("R1 - Reserves ") ;
+        listRallyBattalionSpinner.add("R2 - Bonus & Penalty") ;
+
+
         Spinner spinner1 = (Spinner) findViewById(R.id.Spinner01);
 
         /*
@@ -271,13 +301,15 @@ public class SpinnerActivity extends Activity {
 //                dataAdapterSt2.add("Nothing found1");
 //            }//
             
- 
+            dataAdapterSt2.notifyDataSetChanged() ;
+            
             tvMain = (TextView) findViewById(R.id.tvTextMain);;
             tvPrereq = (TextView) findViewById(R.id.tvTextPrereq);;
 
             tvMain.setText("Nothing Selected.");
             tvPrereq.setText("No Prerequisites.");
 
+            SpinnerActivity.this.setSpinnerPosition(0);
 
             String spinnerString = SpinnerActivity.this.getSpinnerSelection();
             // tvMain.setText(spinnerString) ;
@@ -332,12 +364,6 @@ public class SpinnerActivity extends Activity {
 //        listUnusualEventsSpinner.add("U1 - TBC");
 //        listRallyBattalionSpinner.add("R1 - TBC") ;
 
-//        listAttackSpinner.add("A1 - punch") ;
-//        listAttackSpinner.add("A2 - kick") ;
-//        listAttackSpinner.add("A3 - bite") ;
-//        listDefenceSpinner.add("D1 - block") ;
-//        listDefenceSpinner.add("D2 - hide") ;
-//        listDefenceSpinner.add("D3 - run away") ;
 
         }
 
